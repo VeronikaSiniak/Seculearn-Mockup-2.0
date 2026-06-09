@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seculearn GmbH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f5f7;--bg2:#eaeaee;--white:#ffffff;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.16);
+  --text:#0f0f13;--muted:#7a7a84;
+  --navy:#1e2a6e;--navy2:#3547a8;
+  --nd:rgba(30,42,110,0.08);--nb:rgba(30,42,110,0.22);
+  --fd:'Barlow Condensed',sans-serif;--fb:'Barlow',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--fd);font-weight:700;font-size:22px;letter-spacing:.1em;color:var(--text);text-decoration:none}
+.logo span{color:var(--navy)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:var(--fd);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-r{display:flex;align-items:center;gap:18px}
+.lt{display:flex;align-items:center;gap:8px}
+.lb{font-family:var(--fd);font-size:12px;letter-spacing:.1em;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;transition:color .2s}
+.lb.active{color:var(--navy);font-weight:600}
+.lsep{color:var(--border2);font-size:11px}
+.nav-cta{font-family:var(--fd);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);border:1px solid var(--nb);padding:8px 20px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--nd)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.ham span{display:block;width:24px;height:1.5px;background:var(--text);transition:transform .3s,opacity .3s}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.drawer{display:none;position:fixed;top:68px;left:0;right:0;z-index:199;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:20px 20px 28px;flex-direction:column}
+.drawer.open{display:flex}
+.drawer a{font-family:var(--fd);font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.drawer a:hover{color:var(--navy)}
+.drawer-lang{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.drawer-cta{margin-top:16px;background:var(--navy);color:#fff!important;text-align:center;padding:14px;border-bottom:none!important}
+
+/* BTNS */
+.btn{font-family:var(--fd);font-size:14px;letter-spacing:.12em;text-transform:uppercase;padding:14px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:none;transition:background .2s}
+.btn-p{color:#fff;background:var(--navy)}.btn-p:hover{background:var(--navy2)}
+.btn-s{color:var(--navy);border:1px solid var(--nb);background:transparent}.btn-s:hover{background:var(--nd)}
+
+/* COMMON */
+.sl{display:inline-flex;align-items:center;gap:10px;font-family:var(--fd);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);margin-bottom:14px}
+.sl::before{content:'';display:inline-block;width:22px;height:1px;background:var(--navy);opacity:.5}
+h2{font-family:var(--fd);font-size:clamp(32px,5vw,54px);font-weight:700;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;margin-bottom:18px}
+section{padding:88px 48px}
+
+/* HERO */
+.hero{min-height:100vh;padding:68px 48px 72px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(155deg,#eef0f9 0%,#f5f5f7 55%,#fff 100%)}
+.hbadge{display:inline-flex;align-items:center;gap:10px;font-family:var(--fd);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);margin-bottom:22px;opacity:.7}
+.hbadge::before{content:'';display:inline-block;width:30px;height:1px;background:var(--navy)}
+.hero h1{font-family:var(--fd);font-size:clamp(52px,9vw,106px);font-weight:700;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;max-width:840px;margin-bottom:26px}
+.hero h1 em{font-style:normal;color:var(--navy)}
+.hsub{font-size:16px;font-weight:300;color:var(--muted);max-width:440px;margin-bottom:38px;line-height:1.65}
+.hbtns{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.statsbar{display:flex;align-items:center;margin-top:60px;padding-top:32px;border-top:1px solid var(--border2)}
+.stat{flex:1;padding-right:36px}
+.sdiv{width:1px;height:42px;background:var(--border2);flex-shrink:0;margin-right:36px}
+.snum{font-family:var(--fd);font-size:46px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:5px}
+.slbl{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+
+/* ANIMATIONS */
+@keyframes fup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hbadge{animation:fup .6s ease both .1s}
+.hero h1{animation:fup .7s ease both .22s}
+.hsub{animation:fup .7s ease both .36s}
+.hbtns{animation:fup .7s ease both .5s}
+.statsbar{animation:fup .7s ease both .63s}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* FEATURED COURSE */
+.fc-section{background:var(--white);padding:80px 48px;border-bottom:1px solid var(--border)}
+.fc-ey{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.fc-tbadge{font-family:var(--fd);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--navy);padding:4px 13px}
+.fc-panel{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border2)}
+.fc-left{padding:44px 40px;border-right:1px solid var(--border2);display:flex;flex-direction:column;gap:26px}
+.fc-title{font-family:var(--fd);font-size:clamp(30px,3.5vw,48px);font-weight:700;text-transform:uppercase;line-height:.95;margin:0}
+.fc-title em{font-style:normal;color:var(--navy)}
+.fc-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:400px}
+.fc-meta{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fc-mi{display:flex;gap:10px;align-items:flex-start}
+.fc-ico{width:28px;height:28px;background:var(--nd);border:1px solid var(--nb);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--navy)}
+.fc-ico svg{width:13px;height:13px}
+.fc-ml{font-family:var(--fd);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1px}
+.fc-mv{font-size:13px;color:var(--text);line-height:1.4}
+.fc-cl{font-family:var(--fd);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.fc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.fc-list li{font-size:13px;color:var(--text);padding-left:13px;position:relative;line-height:1.5}
+.fc-list li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--navy);opacity:.5}
+.fc-pbar{display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--border2);gap:14px;flex-wrap:wrap}
+.fc-pnum{font-family:var(--fd);font-size:32px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:3px}
+.fc-pnote{font-size:11px;color:var(--muted)}
+.fc-right{padding:44px 40px;background:var(--bg);display:flex;flex-direction:column;gap:18px}
+.fc-bt{font-family:var(--fd);font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.fc-bs{font-size:13px;color:var(--muted)}
+.fc-cal{background:var(--white);border:1px solid var(--border2);padding:18px}
+.fc-ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.fc-cm{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.05em}
+.fc-cn{display:flex;gap:5px}
+.fc-cb{background:var(--bg2);border:1px solid var(--border);color:var(--text);width:25px;height:25px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.fc-cb:hover{background:var(--nd);color:var(--navy)}
+.fc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.fc-dl{font-family:var(--fd);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding:2px 0 6px}
+.fc-d{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);border-radius:2px}
+.fc-d.empty{pointer-events:none}
+.fc-d.av{color:var(--navy);background:var(--nd);border:1px solid var(--nb);cursor:pointer;font-weight:600;transition:background .15s}
+.fc-d.av:hover{background:var(--navy);color:#fff}
+.fc-d.picked{background:var(--navy)!important;color:#fff!important;border-color:var(--navy)!important}
+.fc-leg{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--muted);margin-top:9px}
+.fc-dot{width:6px;height:6px;background:var(--navy2);border-radius:50%;opacity:.6}
+.fc-tw{display:none}
+.fc-tl{font-family:var(--fd);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;margin-top:13px}
+.fc-ts{display:flex;gap:6px;flex-wrap:wrap}
+.fc-t{background:var(--bg2);border:1px solid var(--border2);color:var(--text);font-family:var(--fd);font-size:12px;padding:6px 13px;cursor:pointer;transition:background .15s}
+.fc-t:hover,.fc-t.picked{background:var(--navy);border-color:var(--navy);color:#fff}
+.fc-cw{display:none;margin-top:13px}
+.fc-conf{width:100%;background:var(--navy);color:#fff;border:none;font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px;cursor:pointer;transition:background .2s}
+.fc-conf:hover{background:var(--navy2)}
+.fc-sp{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);margin-top:7px;justify-content:center}
+.fc-fnote{font-size:11px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:13px}
+
+/* SERVICES */
+.srv{background:var(--bg)}
+.srv-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.srv-hd p{max-width:340px;color:var(--muted);font-size:14px;line-height:1.7}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2)}
+.sc{background:var(--white);padding:32px 28px;display:flex;flex-direction:column;gap:11px}
+.sc-num{font-family:var(--fd);font-size:10px;letter-spacing:.16em;color:var(--navy);opacity:.6}
+.sc-ico{width:36px;height:36px;opacity:.65}
+.sc h3{font-family:var(--fd);font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.sc p{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* WHY */
+.why{background:var(--white)}
+.why-in{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
+.why-lead{font-size:18px;font-weight:300;color:var(--text);line-height:1.6;margin-bottom:20px;border-left:2px solid var(--navy);padding-left:18px}
+.why-body{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:28px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.pill{background:var(--bg);padding:22px 20px}
+.pdot{width:14px;height:14px;background:var(--navy);opacity:.45;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);margin-bottom:10px}
+.pill h4{font-family:var(--fd);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.pill p{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* ABOUT */
+.about{background:var(--bg)}
+.about-in{display:grid;grid-template-columns:1fr 420px;gap:68px;align-items:start}
+.about-text p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:18px}
+.fc-card{background:var(--white);border:1px solid var(--border2);padding:32px;position:relative}
+.fc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--navy)}
+.fav{width:64px;height:64px;background:var(--nd);border:1px solid var(--nb);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.fname{font-family:var(--fd);font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.frole{font-size:12px;color:var(--navy);letter-spacing:.06em;margin-bottom:16px}
+.creds{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.cred{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.cred::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--navy);opacity:.5;flex-shrink:0}
+.fquote{font-size:13px;color:var(--muted);font-style:italic;line-height:1.7;border-top:1px solid var(--border);padding-top:14px}
+
+/* CONTACT */
+.contact{background:var(--white)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+.ct-info>p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.ci-list{display:flex;flex-direction:column;gap:13px}
+.ci{display:flex;gap:11px;align-items:flex-start}
+.ci-dot{width:6px;height:6px;border-radius:50%;background:var(--navy);flex-shrink:0;margin-top:6px;opacity:.6}
+.ci-l{font-family:var(--fd);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-bottom:1px}
+.ci-v{font-size:13px;color:var(--text)}
+.fcard{background:var(--bg);border:1px solid var(--border2);padding:32px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-family:var(--fd);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--white);border:1px solid var(--border2);color:var(--text);font-family:var(--fb);font-size:13px;font-weight:300;padding:9px 11px;outline:none;transition:border-color .2s;appearance:none;border-radius:0}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--navy)}
+.fg textarea{height:86px;resize:none}
+.fsub{width:100%;background:var(--navy);color:#fff;border:none;font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px;cursor:pointer;transition:background .2s}
+.fsub:hover{background:var(--navy2)}
+.fpnote{font-size:10px;color:var(--muted);text-align:center;margin-top:9px;line-height:1.5}
+.fpnote a{color:var(--navy);text-decoration:none}
+
+/* FOOTER */
+footer{background:var(--text);padding:52px 48px 26px}
+.ft-in{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.ft-logo{font-family:var(--fd);font-weight:700;font-size:19px;letter-spacing:.1em;color:#fff;margin-bottom:8px}
+.ft-logo .ft-accent{color:var(--navy2)}
+.ft-logo .ft-gmbh{color:rgba(255,255,255,.2);font-weight:300;font-size:13px}
+.ft-brand p{font-size:12px;color:rgba(255,255,255,.38);line-height:1.7;max-width:210px}
+.ft-col h5{font-family:var(--fd);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:7px}
+.ft-col a{font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.ft-col a:hover{color:#fff}
+.ft-col address{font-style:normal;font-size:12px;color:rgba(255,255,255,.35);line-height:1.7}
+.ft-bot{border-top:1px solid rgba(255,255,255,.09);padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,.28)}
+.socials{display:flex;gap:14px}
+.socials a{font-family:var(--fd);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);text-decoration:none;transition:color .2s}
+.socials a:hover{color:#fff}
+
+/* TAG */
+.tag{position:fixed;bottom:12px;right:12px;z-index:999;background:var(--bg2);color:var(--muted);border:1px solid var(--border2);font-family:var(--fd);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav,footer{padding-left:28px;padding-right:28px}
+  section,.fc-section{padding-left:28px;padding-right:28px}
+  .fc-panel{grid-template-columns:1fr}
+  .fc-left{border-right:none;border-bottom:1px solid var(--border2)}
+  .srv-grid{grid-template-columns:repeat(2,1fr)}
+  .why-in{gap:44px}
+  .about-in{grid-template-columns:1fr;gap:32px}
+  .ft-in{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media(max-width:767px){
+  nav{padding:0 16px}
+  .nav-links,.nav-r{display:none}
+  .ham{display:flex}
+  section,.fc-section{padding-left:16px;padding-right:16px;padding-top:60px;padding-bottom:60px}
+  footer{padding-left:16px;padding-right:16px}
+  .hero{padding:68px 16px 56px}
+  .hsub{font-size:14px}
+  .hbtns{flex-direction:column}
+  .btn{text-align:center;width:100%}
+  .statsbar{flex-wrap:wrap;margin-top:36px}
+  .stat{flex:0 0 50%;padding:16px 0 4px;border-bottom:1px solid var(--border)}
+  .sdiv{display:none}
+  .snum{font-size:34px}
+  .srv-hd,.srv-grid{grid-template-columns:1fr}
+  .srv-hd{flex-direction:column;gap:12px}
+  .why-in,.ct-grid,.about-in{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .fc-meta{grid-template-columns:1fr}
+  .fc-pbar{flex-direction:column;align-items:flex-start}
+  .fc-left,.fc-right{padding:26px 18px}
+  .frow{grid-template-columns:1fr}
+  .fcard{padding:22px 16px}
+  .ft-in{grid-template-columns:1fr;gap:24px}
+  .ft-bot{flex-direction:column;gap:10px;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="tag">Mockup</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">SECU<span>LEARN</span></a>
+  <ul class="nav-links">
+    <li><a href="#services" data-i18n="nav-s">Leistungen</a></li>
+    <li><a href="#kurs" data-i18n="nav-k">TÜV-Kurs</a></li>
+    <li><a href="#about" data-i18n="nav-a">Über uns</a></li>
+    <li><a href="#contact" data-i18n="nav-c">Kontakt</a></li>
+  </ul>
+  <div class="nav-r">
+    <div class="lt">
+      <button class="lb active" data-lang="de">DE</button>
+      <span class="lsep">|</span>
+      <button class="lb" data-lang="en">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav-cta">Anfrage senden</a>
+  </div>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<div class="drawer" id="drawer">
+  <a href="#services" data-i18n="nav-s">Leistungen</a>
+  <a href="#kurs" data-i18n="nav-k">TÜV-Kurs</a>
+  <a href="#about" data-i18n="nav-a">Über uns</a>
+  <a href="#contact" data-i18n="nav-c">Kontakt</a>
+  <div class="drawer-lang">
+    <button class="lb active" data-lang="de" style="font-size:15px">DE</button>
+    <span class="lsep">|</span>
+    <button class="lb" data-lang="en" style="font-size:15px">EN</button>
+  </div>
+  <a href="#contact" class="drawer-cta" data-i18n="nav-cta">Anfrage senden</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbadge" data-i18n="hb">Gegründet 2005 · Über 30.000 Trainingsteilnehmer</div>
+  <h1 data-i18n="h1">Wir trainieren<br>die, die im<br><em>Ernstfall</em><br>nicht versagen.</h1>
+  <p class="hsub" data-i18n="hs">Aviation Security, Close Protection und Krisenmanagement auf höchstem Niveau – maßgeschneidert für Behörden, Unternehmen und Privatpersonen in ganz Europa.</p>
+  <div class="hbtns">
+    <a href="#contact" class="btn btn-p" data-i18n="hc1">Kostenlose Erstberatung</a>
+    <a href="#services" class="btn btn-s" data-i18n="hc2">Leistungen ansehen</a>
+  </div>
+  <div class="statsbar">
+    <div class="stat"><div class="snum">30.000+</div><div class="slbl" data-i18n="st1">Trainingsteilnehmer</div></div>
+    <div class="sdiv"></div>
+    <div class="stat"><div class="snum">20+</div><div class="slbl" data-i18n="st2">Jahre Erfahrung</div></div>
+    <div class="sdiv"></div>
+    <div class="stat"><div class="snum">EU-weit</div><div class="slbl" data-i18n="st3">Einsatzgebiet</div></div>
+    <div class="sdiv"></div>
+    <div class="stat"><div class="snum">100%</div><div class="slbl" data-i18n="st4">Maßgeschneidert</div></div>
+  </div>
+</section>
+
+<!-- FEATURED COURSE -->
+<div class="fc-section reveal" id="kurs">
+  <div class="fc-ey">
+    <div class="sl" data-i18n="fc-sl">Flagship-Kurs</div>
+    <div class="fc-tbadge" data-i18n="fc-tb">TÜV-zertifiziert</div>
+  </div>
+  <div class="fc-panel">
+    <div class="fc-left">
+      <div>
+        <h2 class="fc-title" data-i18n="fc-t">Notfallkrisen&shy;manager<br><em>TÜV</em></h2>
+        <p class="fc-sub" data-i18n="fc-s">Die Qualifikation für Führungskräfte und Sicherheitsverantwortliche, die im Ernstfall handlungsfähig bleiben müssen.</p>
+      </div>
+      <div class="fc-meta">
+        <div class="fc-mi"><div class="fc-ico"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div><div><div class="fc-ml" data-i18n="m1l">Abschluss</div><div class="fc-mv" data-i18n="m1v">Zertifikat Notfall-Krisenmanager TÜV</div></div></div>
+        <div class="fc-mi"><div class="fc-ico"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.2"/><path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><div><div class="fc-ml" data-i18n="m2l">Dauer</div><div class="fc-mv" data-i18n="m2v">3 Tage · flexibel buchbar</div></div></div>
+        <div class="fc-mi"><div class="fc-ico"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M6 2v4M14 2v4M2 9h16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div><div><div class="fc-ml" data-i18n="m3l">Format</div><div class="fc-mv" data-i18n="m3v">Präsenz · Online · Inhouse</div></div></div>
+        <div class="fc-mi"><div class="fc-ico"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2C6 2 3 5 3 9c0 5 7 9 7 9s7-4 7-9c0-4-3-7-7-7z" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="9" r="2.5" stroke="currentColor" stroke-width="1.2"/></svg></div><div><div class="fc-ml" data-i18n="m4l">Ort</div><div class="fc-mv" data-i18n="m4v">Bayern & bundesweit</div></div></div>
+      </div>
+      <div>
+        <div class="fc-cl" data-i18n="fc-cl">Kursinhalte</div>
+        <ul class="fc-list">
+          <li data-i18n="li1">Grundlagen des Notfall- & Krisenmanagements</li>
+          <li data-i18n="li2">Rechtliche Rahmenbedingungen & Haftung</li>
+          <li data-i18n="li3">Erstellung von Notfall- und Krisenplänen</li>
+          <li data-i18n="li4">Stabsarbeit & Entscheidungsfindung unter Druck</li>
+          <li data-i18n="li5">Kommunikation in der Krise (intern & extern)</li>
+          <li data-i18n="li6">Praktische Übungen & Fallstudien</li>
+          <li data-i18n="li7">Vorbereitung auf die TÜV-Prüfung</li>
+        </ul>
+      </div>
+      <div class="fc-pbar">
+        <div><span class="fc-pnum">1.490 €</span><span class="fc-pnote" data-i18n="fc-pn">zzgl. MwSt. · inkl. Prüfungsgebühr</span></div>
+        <a href="#" class="btn btn-p" data-i18n="fc-cta">Jetzt buchen</a>
+      </div>
+    </div>
+    <div class="fc-right">
+      <div>
+        <div class="fc-bt" data-i18n="fc-bt">Termin wählen & buchen</div>
+        <div class="fc-bs" data-i18n="fc-bs">Direkte Buchung mit Zahlung via Stripe</div>
+      </div>
+      <div class="fc-cal">
+        <div class="fc-ch">
+          <div class="fc-cm">Juni 2025</div>
+          <div class="fc-cn"><button class="fc-cb">‹</button><button class="fc-cb">›</button></div>
+        </div>
+        <div class="fc-grid">
+          <div class="fc-dl">Mo</div><div class="fc-dl">Di</div><div class="fc-dl">Mi</div><div class="fc-dl">Do</div><div class="fc-dl">Fr</div><div class="fc-dl">Sa</div><div class="fc-dl">So</div>
+          <div class="fc-d empty"></div><div class="fc-d empty"></div><div class="fc-d empty"></div><div class="fc-d empty"></div><div class="fc-d empty"></div><div class="fc-d">1</div><div class="fc-d">2</div>
+          <div class="fc-d">3</div><div class="fc-d">4</div><div class="fc-d av" onclick="pd(this)">5</div><div class="fc-d">6</div><div class="fc-d av" onclick="pd(this)">7</div><div class="fc-d">8</div><div class="fc-d">9</div>
+          <div class="fc-d">10</div><div class="fc-d">11</div><div class="fc-d av" onclick="pd(this)">12</div><div class="fc-d">13</div><div class="fc-d av" onclick="pd(this)">14</div><div class="fc-d">15</div><div class="fc-d">16</div>
+          <div class="fc-d">17</div><div class="fc-d">18</div><div class="fc-d av" onclick="pd(this)">19</div><div class="fc-d">20</div><div class="fc-d av" onclick="pd(this)">21</div><div class="fc-d">22</div><div class="fc-d">23</div>
+          <div class="fc-d">24</div><div class="fc-d">25</div><div class="fc-d av" onclick="pd(this)">26</div><div class="fc-d">27</div><div class="fc-d">28</div><div class="fc-d">29</div><div class="fc-d">30</div>
+        </div>
+        <div class="fc-leg"><span class="fc-dot"></span> <span data-i18n="fc-leg">Freier Termin</span></div>
+        <div class="fc-tw" id="tw">
+          <div class="fc-tl" data-i18n="fc-tl">Verfügbare Zeiten</div>
+          <div class="fc-ts">
+            <button class="fc-t" onclick="pt(this)">09:00</button>
+            <button class="fc-t" onclick="pt(this)">10:30</button>
+            <button class="fc-t" onclick="pt(this)">14:00</button>
+          </div>
+        </div>
+        <div class="fc-cw" id="cw">
+          <button class="fc-conf" data-i18n="fc-conf">Termin buchen & bezahlen →</button>
+          <div class="fc-sp"><svg viewBox="0 0 24 24" fill="none" style="width:12px;height:12px;opacity:.4"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 10h22" stroke="currentColor" stroke-width="1.5"/></svg><span data-i18n="fc-stripe">Sichere Zahlung via Stripe</span></div>
+        </div>
+      </div>
+      <p class="fc-fnote" data-i18n="fc-fn">Nach der Buchung erhalten Sie eine Bestätigung mit allen Kursunterlagen per E-Mail. Stornierung bis 14 Tage vor Kursbeginn kostenfrei.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="srv reveal" id="services">
+  <div class="srv-hd">
+    <div><div class="sl" data-i18n="sl-s">Leistungen</div><h2 data-i18n="s-h2">Spezialisiert.<br>Erprobt. Diskret.</h2></div>
+    <p data-i18n="s-in">Keine Standardprogramme. Jedes Training wird exakt auf die Anforderungen unserer Kunden zugeschnitten.</p>
+  </div>
+  <div class="srv-grid">
+    <div class="sc"><div class="sc-num">01</div><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><path d="M4 21s6-2 10-2l8-9 3 1-4 8h6l4-3 2 1-3 4 3 4-2 1-4-3h-6l4 8-3 1-8-9c-4 0-10-2-10-2v-1z" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/></svg><h3 data-i18n="s1h">Aviation Security</h3><p data-i18n="s1t">Zertifizierte Schulungen für Fluggesellschaften und Luftfahrtbehörden. Konform mit EU- und ICAO-Regularien.</p></div>
+    <div class="sc"><div class="sc-num">02</div><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="11" r="4" stroke="var(--navy)" stroke-width="1.3"/><path d="M12 30c0-6 3-10 8-10s8 4 8 10" stroke="var(--navy)" stroke-width="1.3" stroke-linecap="round"/><path d="M28 17l4 2v7c0 3-4 5-4 5s-4-2-4-5v-7l4-2z" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/></svg><h3 data-i18n="s2h">Close Protection</h3><p data-i18n="s2t">Training und operativer Service für den Personenschutz nach internationalen Standards.</p></div>
+    <div class="sc"><div class="sc-num">03</div><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><path d="M20 7L35 33H5L20 7z" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/><line x1="20" y1="17" x2="20" y2="25" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="29" r="1.2" fill="var(--navy)"/></svg><h3 data-i18n="s3h">Krisenmanagement</h3><p data-i18n="s3t">Beratung und Training in Risiko-, Notfall- und Krisenmanagement inkl. Versicherungsberatung.</p></div>
+    <div class="sc"><div class="sc-num">04</div><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="7" y="14" width="26" height="20" rx=".5" stroke="var(--navy)" stroke-width="1.3"/><path d="M5 15L20 6l15 9" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/><path d="M16 34v-8h8v8" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/><rect x="10" y="19" width="5" height="4" rx=".3" stroke="var(--navy)" stroke-width="1.1"/><rect x="25" y="19" width="5" height="4" rx=".3" stroke="var(--navy)" stroke-width="1.1"/></svg><h3 data-i18n="s4h">Hotellerie & Gastgewerbe</h3><p data-i18n="s4t">Sicherheitstraining für Hotels – von Mitarbeiterschulungen bis zur Notfallplanung.</p></div>
+    <div class="sc"><div class="sc-num">05</div><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="6" y="16" width="28" height="18" rx="1" stroke="var(--navy)" stroke-width="1.3"/><path d="M6 22h28M6 28h28" stroke="var(--navy)" stroke-width="1.1" opacity=".4"/><path d="M6 16l4-6h20l4 6" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/><path d="M14 10l-2 6M22 10l-2 6" stroke="var(--navy)" stroke-width="1.3" stroke-linecap="round"/></svg><h3 data-i18n="s5h">Film & Medienbranche</h3><p data-i18n="s5t">Set-Security, Risikoanalysen und Schutzkonzepte für Produktionen weltweit.</p></div>
+    <div class="sc"><div class="sc-num">06</div><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><path d="M20 6l4 4h6v6l4 4-4 4v6h-6l-4 4-4-4H10v-6l-4-4 4-4V10h6l4-4z" stroke="var(--navy)" stroke-width="1.3" stroke-linejoin="round"/><circle cx="20" cy="20" r="5" stroke="var(--navy)" stroke-width="1.3"/></svg><h3 data-i18n="s6h">Behörden & Spezialeinheiten</h3><p data-i18n="s6t">Taktisches Training für Grenzschutz, Zoll, Polizei und Spezialkräfte.</p></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why reveal" id="why">
+  <div class="why-in">
+    <div>
+      <div class="sl" data-i18n="sl-w">Warum Seculearn</div>
+      <h2 data-i18n="w-h2">Keine Standards.<br>Nur Ergebnisse.</h2>
+      <p class="why-lead" data-i18n="w-lead">„Nur wer vorbereitet ist, kann im Ernstfall sicher handeln."</p>
+      <p class="why-body" data-i18n="w-body">Seit 2005 entwickeln wir Trainings und Sicherheitslösungen, die auf die tatsächlichen Bedürfnisse unserer Kunden zugeschnitten sind – keine Standardkurse, keine Kompromisse.</p>
+      <a href="#contact" class="btn btn-p" data-i18n="w-cta">Gespräch vereinbaren</a>
+    </div>
+    <div class="pillars">
+      <div class="pill"><div class="pdot"></div><h4 data-i18n="p1h">Maßgeschneidert</h4><p data-i18n="p1t">Für Ihre Branche, Ihre Bedrohungslage, Ihr Team.</p></div>
+      <div class="pill"><div class="pdot"></div><h4 data-i18n="p2h">Höchste Standards</h4><p data-i18n="p2t">International anerkannte Methoden, aktuelle Regularien.</p></div>
+      <div class="pill"><div class="pdot"></div><h4 data-i18n="p3h">Absolute Diskretion</h4><p data-i18n="p3t">Vertraulichkeit als Grundvoraussetzung jeder Zusammenarbeit.</p></div>
+      <div class="pill"><div class="pdot"></div><h4 data-i18n="p4h">Praxiserfahrung</h4><p data-i18n="p4t">Trainer aus der Praxis – kein theoretisches Wissen.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about reveal" id="about">
+  <div class="about-in">
+    <div class="about-text">
+      <div class="sl" data-i18n="sl-ab">Über uns</div>
+      <h2 data-i18n="ab-h2">Gegründet von<br>einem Praktiker.</h2>
+      <p data-i18n="ab-p1">Seculearn GmbH wurde 2005 von Asim Wachter gegründet und 2017 als GmbH eingetragen. Mit über 20 Jahren Erfahrung hat das Unternehmen mehr als 30.000 Teilnehmer in ganz Europa trainiert.</p>
+      <p data-i18n="ab-p2">Unser Ansatz: Wir hören zu, analysieren den tatsächlichen Bedarf und entwickeln dann – und nur dann – eine Lösung. Wertschätzung gegenüber Kunden und Mitarbeitern ist gelebter Anspruch.</p>
+    </div>
+    <div class="fc-card">
+      <div class="fav">AW</div>
+      <div class="fname">Asim Wachter</div>
+      <div class="frole" data-i18n="f-role">Gründer & Geschäftsführer</div>
+      <div class="creds">
+        <div class="cred" data-i18n="cr1">Über 20 Jahre operative Erfahrung</div>
+        <div class="cred" data-i18n="cr2">Trainer für Behörden & Privatsektor</div>
+        <div class="cred" data-i18n="cr3">EU-weit aktiv seit 2005</div>
+        <div class="cred" data-i18n="cr4">30.000+ trainierte Teilnehmer</div>
+      </div>
+      <p class="fquote" data-i18n="f-quote">„Wer aufgehört hat, besser zu werden, hat aufgehört, gut zu sein."</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact reveal" id="contact">
+  <div class="ct-grid">
+    <div class="ct-info">
+      <div class="sl" data-i18n="sl-ct">Kontakt</div>
+      <h2 data-i18n="ct-h2">Sprechen wir<br>über Ihren Bedarf.</h2>
+      <p data-i18n="ct-p">Jede Anfrage wird vertraulich behandelt. Wir melden uns innerhalb von 24 Stunden.</p>
+      <div class="ci-list">
+        <div class="ci"><div class="ci-dot"></div><div><div class="ci-l" data-i18n="ct-al">Adresse</div><div class="ci-v">Seculearn GmbH · Hauptstraße 1 · 85560 Ebersberg</div></div></div>
+        <div class="ci"><div class="ci-dot"></div><div><div class="ci-l">E-Mail</div><div class="ci-v">mail@seculearn.com</div></div></div>
+        <div class="ci"><div class="ci-dot"></div><div><div class="ci-l">Telefon</div><div class="ci-v">+49 (0) 8106 394 9189</div></div></div>
+        <div class="ci"><div class="ci-dot"></div><div><div class="ci-l" data-i18n="ct-rl">Region</div><div class="ci-v" data-i18n="ct-rv">Bayern · Deutschland · Europa</div></div></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <div class="frow">
+        <div class="fg"><label data-i18n="ff">Vorname</label><input type="text" placeholder="Max"></div>
+        <div class="fg"><label data-i18n="fl">Nachname</label><input type="text" placeholder="Mustermann"></div>
+      </div>
+      <div class="fg"><label>E-Mail</label><input type="email" placeholder="max@unternehmen.de"></div>
+      <div class="fg"><label data-i18n="fc-co">Unternehmen</label><input type="text" placeholder="Muster GmbH"></div>
+      <div class="fg">
+        <label data-i18n="f-sv">Leistung von Interesse</label>
+        <select>
+          <option data-i18n="f-sp">Bitte wählen...</option>
+          <option>Aviation Security Training</option>
+          <option>Close Protection</option>
+          <option>Krisenmanagement</option>
+          <option>Hotellerie & Gastgewerbe</option>
+          <option>Film & Medienbranche</option>
+          <option>Behörden & Spezialeinheiten</option>
+          <option>Notfall-Krisenmanager TÜV</option>
+        </select>
+      </div>
+      <div class="fg"><label data-i18n="f-ml">Kurze Beschreibung</label><textarea placeholder="Worum geht es? Zeitrahmen? Teilnehmerzahl?"></textarea></div>
+      <button class="fsub" data-i18n="f-sub">Anfrage senden</button>
+      <p class="fpnote"><span data-i18n="f-pn">Ihre Daten werden vertraulich behandelt.</span> <a href="#" data-i18n="f-pl">Datenschutzerklärung</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-brand">
+      <div class="ft-logo">SECU<span class="ft-accent">LEARN</span> <span class="ft-gmbh">GmbH</span></div>
+      <p data-i18n="ft-tl">Maßgeschneiderte Sicherheitsausbildung und -beratung seit 2005. Ihr Vertrauen ist unsere Verpflichtung.</p>
+    </div>
+    <div class="ft-col"><h5 data-i18n="ft-c1">Leistungen</h5><ul>
+      <li><a href="#services">Aviation Security</a></li>
+      <li><a href="#services">Close Protection</a></li>
+      <li><a href="#services">Krisenmanagement</a></li>
+      <li><a href="#services">Hotellerie</a></li>
+      <li><a href="#services">Film & Medien</a></li>
+      <li><a href="#kurs">TÜV-Kurs</a></li>
+    </ul></div>
+    <div class="ft-col"><h5 data-i18n="ft-c2">Unternehmen</h5><ul>
+      <li><a href="#about" data-i18n="ft-ab">Über uns</a></li>
+      <li><a href="#why" data-i18n="ft-ap">Ansatz & Philosophie</a></li>
+      <li><a href="#contact" data-i18n="nav-c">Kontakt</a></li>
+      <li><a href="#" data-i18n="ft-im">Impressum</a></li>
+      <li><a href="#" data-i18n="ft-dp">Datenschutz</a></li>
+    </ul></div>
+    <div class="ft-col"><h5 data-i18n="ft-c3">Kontakt</h5><ul><li><a href="mailto:mail@seculearn.com">mail@seculearn.com</a></li><li><a href="tel:+4981063949189">+49 (0) 8106 394 9189</a></li><li style="margin-top:10px"><address>Hauptstraße 1<br>85560 Ebersberg<br>Bayern, Deutschland</address></li><li style="margin-top:13px"><a href="#">LinkedIn</a></li><li><a href="#">Facebook</a></li></ul></div>
+  </div>
+  <div class="ft-bot">
+    <span data-i18n="ft-cp">© 2025 Seculearn GmbH – Alle Rechte vorbehalten</span>
+    <div class="socials"><a href="#">LinkedIn</a><a href="#">Facebook</a><a href="#">Instagram</a></div>
+  </div>
+</footer>
+
+<script>
+const T={
+de:{
+'nav-s':'Leistungen','nav-k':'TÜV-Kurs','nav-a':'Über uns','nav-c':'Kontakt','nav-cta':'Anfrage senden',
+'hb':'Gegründet 2005 · Über 30.000 Trainingsteilnehmer',
+'h1':'Wir trainieren<br>die, die im<br><em>Ernstfall</em><br>nicht versagen.',
+'hs':'Aviation Security, Close Protection und Krisenmanagement auf höchstem Niveau – maßgeschneidert für Behörden, Unternehmen und Privatpersonen in ganz Europa.',
+'hc1':'Kostenlose Erstberatung','hc2':'Leistungen ansehen',
+'st1':'Trainingsteilnehmer','st2':'Jahre Erfahrung','st3':'Einsatzgebiet','st4':'Maßgeschneidert',
+'fc-sl':'Flagship-Kurs','fc-tb':'TÜV-zertifiziert',
+'fc-t':'Notfallkrisen&shy;manager<br><em>TÜV</em>',
+'fc-s':'Die Qualifikation für Führungskräfte und Sicherheitsverantwortliche, die im Ernstfall handlungsfähig bleiben müssen.',
+'m1l':'Abschluss','m1v':'Zertifikat Notfall-Krisenmanager TÜV',
+'m2l':'Dauer','m2v':'3 Tage · flexibel buchbar',
+'m3l':'Format','m3v':'Präsenz · Online · Inhouse',
+'m4l':'Ort','m4v':'Bayern & bundesweit',
+'fc-cl':'Kursinhalte',
+'li1':'Grundlagen des Notfall- & Krisenmanagements',
+'li2':'Rechtliche Rahmenbedingungen & Haftung',
+'li3':'Erstellung von Notfall- und Krisenplänen',
+'li4':'Stabsarbeit & Entscheidungsfindung unter Druck',
+'li5':'Kommunikation in der Krise (intern & extern)',
+'li6':'Praktische Übungen & Fallstudien',
+'li7':'Vorbereitung auf die TÜV-Prüfung',
+'fc-pn':'zzgl. MwSt. · inkl. Prüfungsgebühr','fc-cta':'Jetzt buchen',
+'fc-bt':'Termin wählen & buchen','fc-bs':'Direkte Buchung mit Zahlung via Stripe',
+'fc-leg':'Freier Termin','fc-tl':'Verfügbare Zeiten',
+'fc-conf':'Termin buchen & bezahlen →','fc-stripe':'Sichere Zahlung via Stripe',
+'fc-fn':'Nach der Buchung erhalten Sie eine Bestätigung per E-Mail. Stornierung bis 14 Tage vor Kursbeginn kostenfrei.',
+'sl-s':'Leistungen','s-h2':'Spezialisiert.<br>Erprobt. Diskret.',
+'s-in':'Keine Standardprogramme. Jedes Training wird exakt auf die Anforderungen unserer Kunden zugeschnitten.',
+'s1h':'Aviation Security','s1t':'Zertifizierte Schulungen für Fluggesellschaften und Luftfahrtbehörden. Konform mit EU- und ICAO-Regularien.',
+'s2h':'Close Protection','s2t':'Training und operativer Service für den Personenschutz nach internationalen Standards.',
+'s3h':'Krisenmanagement','s3t':'Beratung und Training in Risiko-, Notfall- und Krisenmanagement inkl. Versicherungsberatung.',
+'s4h':'Hotellerie & Gastgewerbe','s4t':'Sicherheitstraining für Hotels – von Mitarbeiterschulungen bis zur Notfallplanung.',
+'s5h':'Film & Medienbranche','s5t':'Set-Security, Risikoanalysen und Schutzkonzepte für Produktionen weltweit.',
+'s6h':'Behörden & Spezialeinheiten','s6t':'Taktisches Training für Grenzschutz, Zoll, Polizei und Spezialkräfte.',
+'sl-w':'Warum Seculearn','w-h2':'Keine Standards.<br>Nur Ergebnisse.',
+'w-lead':'„Nur wer vorbereitet ist, kann im Ernstfall sicher handeln."',
+'w-body':'Seit 2005 entwickeln wir Trainings und Sicherheitslösungen, die auf die tatsächlichen Bedürfnisse unserer Kunden zugeschnitten sind – keine Standardkurse, keine Kompromisse.',
+'w-cta':'Gespräch vereinbaren',
+'p1h':'Maßgeschneidert','p1t':'Für Ihre Branche, Ihre Bedrohungslage, Ihr Team.',
+'p2h':'Höchste Standards','p2t':'International anerkannte Methoden, aktuelle Regularien.',
+'p3h':'Absolute Diskretion','p3t':'Vertraulichkeit als Grundvoraussetzung jeder Zusammenarbeit.',
+'p4h':'Praxiserfahrung','p4t':'Trainer aus der Praxis – kein theoretisches Wissen.',
+'sl-ab':'Über uns','ab-h2':'Gegründet von<br>einem Praktiker.',
+'ab-p1':'Seculearn GmbH wurde 2005 von Asim Wachter gegründet und 2017 als GmbH eingetragen. Mit über 20 Jahren Erfahrung hat das Unternehmen mehr als 30.000 Teilnehmer in ganz Europa trainiert.',
+'ab-p2':'Unser Ansatz: Wir hören zu, analysieren den tatsächlichen Bedarf und entwickeln dann – und nur dann – eine Lösung.',
+'f-role':'Gründer & Geschäftsführer',
+'cr1':'Über 20 Jahre operative Erfahrung','cr2':'Trainer für Behörden & Privatsektor',
+'cr3':'EU-weit aktiv seit 2005','cr4':'30.000+ trainierte Teilnehmer',
+'f-quote':'„Wer aufgehört hat, besser zu werden, hat aufgehört, gut zu sein."',
+'sl-ct':'Kontakt','ct-h2':'Sprechen wir<br>über Ihren Bedarf.',
+'ct-p':'Jede Anfrage wird vertraulich behandelt. Wir melden uns innerhalb von 24 Stunden.',
+'ct-al':'Adresse','ct-rl':'Region','ct-rv':'Bayern · Deutschland · Europa',
+'ff':'Vorname','fl':'Nachname','fc-co':'Unternehmen',
+'f-sv':'Leistung von Interesse','f-sp':'Bitte wählen...','f-ml':'Kurze Beschreibung',
+'f-sub':'Anfrage senden','f-pn':'Ihre Daten werden vertraulich behandelt.','f-pl':'Datenschutzerklärung',
+'ft-tl':'Maßgeschneiderte Sicherheitsausbildung und -beratung seit 2005. Ihr Vertrauen ist unsere Verpflichtung.',
+'ft-c1':'Leistungen','ft-c2':'Unternehmen','ft-c3':'Kontakt',
+'ft-ab':'Über uns','ft-ap':'Ansatz & Philosophie','ft-im':'Impressum','ft-dp':'Datenschutz',
+'ft-cp':'© 2025 Seculearn GmbH – Alle Rechte vorbehalten'
+},
+en:{
+'nav-s':'Services','nav-k':'TÜV Course','nav-a':'About','nav-c':'Contact','nav-cta':'Send Enquiry',
+'hb':'Founded 2005 · Over 30,000 Training Participants',
+'h1':'We train those<br>who cannot<br><em>fail</em><br>when it matters.',
+'hs':'Aviation security, close protection and crisis management at the highest level – tailored for authorities, companies and private clients across Europe.',
+'hc1':'Free Initial Consultation','hc2':'View Services',
+'st1':'Training Participants','st2':'Years of Experience','st3':'EU Coverage','st4':'Tailor-Made',
+'fc-sl':'Flagship Course','fc-tb':'TÜV Certified',
+'fc-t':'Emergency Crisis<br>Manager <em>TÜV</em>',
+'fc-s':'The qualification for managers and security officers who must remain capable of action in an emergency.',
+'m1l':'Certificate','m1v':'Emergency Crisis Manager TÜV',
+'m2l':'Duration','m2v':'3 days · flexibly bookable',
+'m3l':'Format','m3v':'On-site · Online · In-house',
+'m4l':'Location','m4v':'Bavaria & nationwide',
+'fc-cl':'Course Contents',
+'li1':'Fundamentals of emergency & crisis management',
+'li2':'Legal framework & liability',
+'li3':'Creating emergency and crisis plans',
+'li4':'Crisis team coordination & decision-making under pressure',
+'li5':'Crisis communication (internal & external)',
+'li6':'Practical exercises & case studies',
+'li7':'Preparation for the TÜV examination',
+'fc-pn':'excl. VAT · incl. examination fee','fc-cta':'Book Now',
+'fc-bt':'Choose Date & Book','fc-bs':'Direct booking with payment via Stripe',
+'fc-leg':'Available Date','fc-tl':'Available Times',
+'fc-conf':'Book & Pay →','fc-stripe':'Secure payment via Stripe',
+'fc-fn':'After booking you will receive a confirmation with all course materials by email. Free cancellation up to 14 days before the course.',
+'sl-s':'Services','s-h2':'Specialised.<br>Proven. Discreet.',
+'s-in':'No off-the-shelf programmes. Every training is developed precisely to meet our clients\' requirements.',
+'s1h':'Aviation Security','s1t':'Certified training for airlines and aviation authorities. Compliant with EU and ICAO regulations.',
+'s2h':'Close Protection','s2t':'Training and operational services for personal protection to international standards.',
+'s3h':'Crisis Management','s3t':'Consulting and training in risk, emergency and crisis management including insurance advice.',
+'s4h':'Hospitality Industry','s4t':'Security training for hotels – from staff training to emergency planning.',
+'s5h':'Film & Media Industry','s5t':'Set security, risk assessments and protection concepts for productions worldwide.',
+'s6h':'Authorities & Special Units','s6t':'Tactical training for border protection, customs, police and special forces.',
+'sl-w':'Why Seculearn','w-h2':'No Shortcuts.<br>Only Results.',
+'w-lead':'"Only those who are prepared can act safely when it matters."',
+'w-body':'Since 2005 we have developed training and security solutions tailored to our clients\' actual needs – no standard courses, no compromises.',
+'w-cta':'Schedule a Call',
+'p1h':'Tailor-Made','p1t':'For your industry, your threat landscape, your team.',
+'p2h':'Highest Standards','p2t':'Internationally recognised methods, current regulations.',
+'p3h':'Full Discretion','p3t':'Confidentiality as a fundamental prerequisite.',
+'p4h':'Field Experience','p4t':'Trainers from practice – not theoretical knowledge.',
+'sl-ab':'About Us','ab-h2':'Founded by<br>a Practitioner.',
+'ab-p1':'Seculearn GmbH was founded in 2005 by Asim Wachter and registered as a GmbH in 2017. With over 20 years of experience the company has trained more than 30,000 participants across Europe.',
+'ab-p2':'Our approach: we listen, analyse the actual need, and only then develop a solution.',
+'f-role':'Founder & Managing Director',
+'cr1':'Over 20 years of operational experience','cr2':'Trainer for authorities & private sector',
+'cr3':'Active across the EU since 2005','cr4':'30,000+ trained participants',
+'f-quote':'"Those who have stopped getting better have stopped being good."',
+'sl-ct':'Contact','ct-h2':'Let\'s talk<br>about your needs.',
+'ct-p':'Every enquiry is treated confidentially. We will get back to you within 24 hours.',
+'ct-al':'Address','ct-rl':'Region','ct-rv':'Bavaria · Germany · Europe',
+'ff':'First Name','fl':'Last Name','fc-co':'Company / Organisation',
+'f-sv':'Service of Interest','f-sp':'Please select...','f-ml':'Brief Description',
+'f-sub':'Send Enquiry','f-pn':'Your data is treated confidentially.','f-pl':'Privacy Policy',
+'ft-tl':'Tailored security training and consulting since 2005. Your trust is our commitment.',
+'ft-c1':'Services','ft-c2':'Company','ft-c3':'Contact',
+'ft-ab':'About Us','ft-ap':'Approach & Philosophy','ft-im':'Legal Notice','ft-dp':'Privacy Policy',
+'ft-cp':'© 2025 Seculearn GmbH – All rights reserved'
+}};
+
+function setLang(lang){
+  document.documentElement.lang=lang;
+  const t=T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.dataset.i18n;
+    if(t[k]!==undefined)el.innerHTML=t[k];
+  });
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+}
+
+function pd(el){
+  document.querySelectorAll('.fc-d.picked').forEach(d=>d.classList.remove('picked'));
+  el.classList.add('picked');
+  document.getElementById('tw').style.display='block';
+  document.getElementById('cw').style.display='none';
+  document.querySelectorAll('.fc-t').forEach(t=>t.classList.remove('picked'));
+}
+function pt(el){
+  document.querySelectorAll('.fc-t').forEach(t=>t.classList.remove('picked'));
+  el.classList.add('picked');
+  document.getElementById('cw').style.display='block';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const ham=document.getElementById('ham');
+  const drawer=document.getElementById('drawer');
+  ham.addEventListener('click',()=>{ham.classList.toggle('open');drawer.classList.toggle('open');});
+  drawer.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');drawer.classList.remove('open');}));
+  document.querySelectorAll('.lb').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  setLang('de');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>
